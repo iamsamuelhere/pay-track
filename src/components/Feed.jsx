@@ -50,7 +50,7 @@ const Feed = ({ data, setFeed }) => {
                     return <div key={i}>
 
                         {(isDateEqual(previousDate, e.formattedDate)) ? <><hr style={{ width: "15%" }} />< p style={{ textAlign: "center", fontFamily: "sans-serif", margin: "0px" }}>{e.formattedDate}</p></> : ""}
-                        <Paper key={i} onClick={() => { console.log(e.id) }} variant="outlined" style={{ display: "flex", width: "50vw", backgroundColor: `${cardColor}`, borderRadius: "10px", marginTop: "5px", marginBottom: "15px", justifyContent: "space-between" }}>
+                        <Paper key={i} onClick={() => { console.log(e.id) }} variant="outlined" style={{ display: "flex", width:"50vh", backgroundColor: `${cardColor}`, borderRadius: "10px", marginTop: "5px", marginBottom: "15px", justifyContent: "space-between" }}>
                             <div style={{ display: "flex", flexDirection: "column" }}>
                                 <div style={{ padding: "5px 15px 0px 15px", color: "white" }}>
                                     {icon}
