@@ -59,7 +59,7 @@ const Feed = ({ data, setFeed }) => {
                                     <b>{e.rupee}</b>
                                 </div>
                             </div>
-                            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", color: "white", fontSize:"25px" }}>
+                            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", color: "white", wordWrap:"break-word"}}>
                                 {e.comment}
                             </div>
                             <IconButton style={{ backgroundColor: "white", margin: "7px" }} onClick={() => {
