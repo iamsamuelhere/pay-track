@@ -6,9 +6,11 @@ import { addEntry, getEntries } from '../../services/firebase';
 import AddIcon from '@mui/icons-material/Add';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
-const BottomBar = ({setFeed}) => {
+const BottomBar = ({ data, setFeed }) => {
     //states
     const [isModalOpen, setModalOpen] = useState(false);
+    const [filterModal, setFilterModal] = useState(false);
+
     const initalEntry = {
         "type": "",
         "rupee": "",
@@ -31,30 +33,57 @@ const BottomBar = ({setFeed}) => {
         const dateValueSplit = entry.date.split("-").reverse();    //[08,06,2023]
         console.log("extractMonthDay", extractMonthDay)  //Jun Thu
         const extractMonthDaySplit = extractMonthDay.split(" ");   //["Jun", "Thu"]
-        const formattedDate= dateValueSplit[0]+" "+extractMonthDaySplit[0]+ " "+ dateValueSplit[2]+ ", "+ extractMonthDaySplit[1];
+        const formattedDate = dateValueSplit[0] + " " + extractMonthDaySplit[0] + " " + dateValueSplit[2] + ", " + extractMonthDaySplit[1];
 
         console.log("formatedDateAndDay", formattedDate);
 
         const updatedEntry = { ...entry, formattedDate };
         console.log("Final", updatedEntry)
-        
-        addEntry(updatedEntry)
-        .then(() => { console.log("Successfully added");})
-        .catch((err) => {
-            console.log("Error", err);
-        }).finally(()=>{
-            setEntry(initalEntry)
-            setModalOpen(false)
-        })
 
-        getEntries().then((res)=>{
+        addEntry(updatedEntry)
+            .then(() => { console.log("Successfully added"); })
+            .catch((err) => {
+                console.log("Error", err);
+            }).finally(() => {
+                setEntry(initalEntry)
+                setModalOpen(false)
+            })
+
+        getEntries().then((res) => {
             setFeed(res);
         })
+    }
 
-
+    const filterFeed = (type) => {
+        console.log("TTTTTType", type)
+        const filteredData = data.filter((entry) => type == entry.type)
+        console.log("FilteredData", filteredData)
+        setFilterModal(false)
+        setFeed(filteredData);
     }
 
     return <>
+        <Modal open={filterModal} onClose={() => {
+            setFilterModal(false)
+        }}>
+            <div style={{ position: "absolute", top: "50%", left: "45%", backgroundColor: "white", padding: "15px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <b>Filter</b>
+                    <button onClick={() => setFilterModal(false)}>X</button>
+                </div>
+                <br/>
+
+                <button onClick={() => { filterFeed("Investment") }}>Investments</button><br/>
+                <button onClick={() => { filterFeed("Spending") }}>Spendings</button><br/>
+                <button onClick={() => { filterFeed("Income") }}>Income</button><br /><br/>
+                <button onClick={()=>{
+                    getEntries().then((res)=>{
+                        setFeed(res);
+                        setFilterModal(false)
+                    })
+                }}>Clear Filter</button>
+    </div>
+    </Modal >
         <Modal open={isModalOpen} onClose={() => {
             setModalOpen(false)
             setEntry(initalEntry)
@@ -85,7 +114,7 @@ const BottomBar = ({setFeed}) => {
 
             </div>
         </Modal>
-        <Fab style={{ position: "absolute", bottom: "0", left: "0", margin: "5px" }}>
+        <Fab onClick={()=>{console.log("CLickedMo"); setFilterModal(true)}} style={{ position: "absolute", bottom: "0", left: "0", margin: "5px" }}>
             <FilterListIcon />
         </Fab>
         <Fab onClick={() => { console.log("Clicked"); setModalOpen(true) }} style={{ position: "absolute", bottom: "0", right: "0", margin: "5px" }}>
@@ -95,6 +124,5 @@ const BottomBar = ({setFeed}) => {
 }
 
 export default BottomBar;
-
 
 

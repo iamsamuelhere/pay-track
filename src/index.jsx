@@ -46,7 +46,7 @@ const App = () => {
         {
             (code === import.meta.env.VITE_AUTH_CODE)?
             <><Feed data={feedData} setFeed={setFeedData} />
-            <BottomBar setFeed={setFeedData} /></>
+            <BottomBar data={feedData} setFeed={setFeedData} /></>
             :<AuthPage updateCode={setCode} />
         }
     </div>
