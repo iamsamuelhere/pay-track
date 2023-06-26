@@ -1,5 +1,6 @@
 # pay-track
 🚀 Pay-track is an FullStack WebApp. <br>
+💰 Built to track Income, Investment and Spendings of user. <br>
 ⚒ Built on ReactJS with Firebase on Backend.
 <hr>
 App-Version: 1.0.0
