@@ -15,7 +15,7 @@ const AuthPage = ({updateCode}) => {
     }
     return <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
         <div>
-            <input style={{ marginBottom: "15px", padding:"15px", fontSize:"17px" }} placeholder='Enter Code' type="tel" onChange={handleChange} /><br />
+            <input style={{ marginBottom: "15px", padding:"15px", fontSize:"17px" }} placeholder='Enter Pin' type="tel" onChange={handleChange} /><br />
         </div>
     </div>
 }
